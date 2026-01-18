@@ -1,14 +1,25 @@
-import { renderHtml } from "./renderHtml";
 
 export default {
-	async fetch(request, env) {
-		const stmt = env.DB.prepare("SELECT * FROM comments LIMIT 3");
-		const { results } = await stmt.all();
+  async fetch(request, env, ctx) {
+    console.log("Odebrano żądanie:", request.method, request.url);
+    return new Response("Worker działa poprawnie", { status: 200 });
+  }
+};
 
-		return new Response(renderHtml(JSON.stringify(results, null, 2)), {
-			headers: {
-				"content-type": "text/html",
-			},
-		});
-	},
-} satisfies ExportedHandler<Env>;
+
+
+
+// import { renderHtml } from "./renderHtml";
+
+// export default {
+// 	async fetch(request, env) {
+// 		const stmt = env.DB.prepare("SELECT * FROM comments LIMIT 3");
+// 		const { results } = await stmt.all();
+
+// 		return new Response(renderHtml(JSON.stringify(results, null, 2)), {
+// 			headers: {
+// 				"content-type": "text/html",
+// 			},
+// 		});
+// 	},
+// } satisfies ExportedHandler<Env>;
